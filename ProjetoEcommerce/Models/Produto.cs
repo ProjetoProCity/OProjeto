@@ -7,5 +7,6 @@
         public string Descr { get; set; }
         public int Qtd { get; set; }
         public double Preco { get; set; }
+        public List<Produto> Produtos { get; set; }
     }
 }
