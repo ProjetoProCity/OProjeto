@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoEcommerce.Repositorio;
+using ProjetoEcommerce.Models;
 
 namespace ProjetoEcommerce.Controllers
 {
@@ -19,6 +20,58 @@ namespace ProjetoEcommerce.Controllers
         public IActionResult CadastrarProduto() 
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarProduto(Produto produto) 
+        {
+            _produtoRepositorio.Cadastrar(produto);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult editarProduto(int id) 
+        {
+            var produto = _produtoRepositorio.ObterProduto(id);
+
+            if(produto == null)
+            {
+                return NotFound();
+            }
+
+            return View(produto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult editarProduto(int id, [Bind("Id, Prod, Descr, Qtd, Preco")] Produto produto)
+        {
+            if (id != produto.Id) 
+            { 
+                return BadRequest();
+            }
+            if (ModelState.IsValid)
+            {
+                try 
+                {
+                    if (_produtoRepositorio.Atualizar(produto))
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }               
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Ocorreu um erro ao tentar atualizar o produto");
+                    return View(produto);
+                }
+            }
+            return View(produto);
+        }
+
+        public IActionResult ExcluirProduto(int id)
+        {
+            _produtoRepositorio.Excluir(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
