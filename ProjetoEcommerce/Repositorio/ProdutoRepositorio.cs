@@ -55,7 +55,7 @@ namespace ProjetoEcommerce.Repositorio
         {
             List<Produto> produtos = new List<Produto>();
 
-            using (var conexao = MySqlConnection(_conexaoMySql))
+            using (var conexao = new MySqlConnection(_conexaoMySql))
             {
                 conexao.Open();
                 MySqlCommand cmd = new MySqlCommand("Select * from Produto", conexao);
@@ -77,6 +77,30 @@ namespace ProjetoEcommerce.Repositorio
                             });
                 }
                 return produtos;
+            }
+        }
+
+        public Produto ObterProduto(int id)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySql)) 
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("Select * from Produto where Id = @id", conexao);
+                cmd.Parameters.AddWithValue("id", id);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                Produto produto = new Produto();
+
+                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (dr.Read())
+                {
+                    produto.Id = Convert.ToInt32(dr["Id"]);
+                    produto.Prod = (string)(dr["Prod"]);
+                    produto.Descr = (string)(dr["Descr"]);
+                    produto.Qtd = Convert.ToInt32(dr["Qtd"]);
+                    produto.Preco = Convert.ToDouble(dr["Preco"]);
+                }
+                return produto;
             }
         }
     }
