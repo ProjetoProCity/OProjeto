@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProjetoEcommerce.Models.Produto>
+
+<p>
+    <a asp-controller="Produto" asp-action="Cadastrar">Cadastra Produto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qtd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qtd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarCliente", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "ExcluirCliente", new { id = item.Id },
+                             new { onclick = "return confirm('Deseja realmente Excluir este item?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
