@@ -1,0 +1,55 @@
+﻿@model ProjetoEcommerce.Models.Produto;
+
+<h1>EditarProduto</h1>
+
+<h4>Produto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="editarProduto" method="post">
+            @*Esse token desempenha um papel crucial na prevenção de ataques de Cross-Site Request Forgery (CSRF).
+            Um ataque CSRF ocorre quando um site malicioso, um e-mail, um programa de mensagens 
+            instantâneas ou um programa induz um navegador da web de um usuário conectado a um aplicativo da web a executar uma 
+            ação indesejada naquele aplicativo. Isso pode acontecer sem o conhecimento ou consentimento do usuário.*@
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Prod" class="control-label"></label>
+                <input asp-for="Prod" class="form-control" />
+                <span asp-validation-for="Prod" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Descr" class="control-label"></label>
+                <input asp-for="Descr" class="form-control" />
+                <span asp-validation-for="Descr" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Qtd" class="control-label"></label>
+                <input asp-for="Qtd" class="form-control" />
+                <span asp-validation-for="Qtd" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label"></label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Alterar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="PainelProduto">Voltar</a>
+</div>
