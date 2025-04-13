@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<ProjetoEcommerce.Models.Cliente>
 
+<p style="justify-self:center;">
+    <a asp-controller="Cliente" asp-action="Index">Cliente</a> <span>-------</span> <a asp-controller="Produto" asp-action="Index">Produto</a>
+</p>
 <p>
-    <a asp-controller="Cliente" asp-action="CadastrarCliente">Cadastra Cliente</a> <span> <a asp-controller="Produto" asp-action="CadastrarProduto">Produto</a>
+    <a asp-controller="Cliente" asp-action="CadastrarCliente">Cadastrar Cliente</a> 
 </p>
 
 <table class="table">

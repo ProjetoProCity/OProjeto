@@ -23,10 +23,6 @@ namespace ProjetoEcommerce.Repositorio
             }
         }
 
-
-
-
-
         public bool Atualizar(Produto produto)
         {
             try
@@ -34,12 +30,12 @@ namespace ProjetoEcommerce.Repositorio
                 using (var conexao = new MySqlConnection(_conexaoMySql))
                 {
                     conexao.Open();
-                    MySqlCommand cmd = new MySqlCommand("update Produto set Prod=@prod, Descr=@descr, Qtd=@qtd, Preco=@preco" + " WHERE Id = @id", conexao);
-                    cmd.Parameters.Add("Id", MySqlDbType.Int64).Value = produto.Id;
-                    cmd.Parameters.Add("Prod", MySqlDbType.VarChar).Value = produto.Prod;
-                    cmd.Parameters.Add("Descr", MySqlDbType.VarChar).Value = produto.Descr;
-                    cmd.Parameters.Add("Qtd", MySqlDbType.Int64).Value = produto.Qtd;
-                    cmd.Parameters.Add("Preco", MySqlDbType.Double).Value = produto.Preco;
+                    MySqlCommand cmd = new MySqlCommand("Update produto set Prod=@prod, Descr=@descr, Qtd=@qtd, Preco=@preco " + " where Id = @id ", conexao);
+                    cmd.Parameters.Add("@id", MySqlDbType.Int64).Value = produto.Id;
+                    cmd.Parameters.Add("@prod", MySqlDbType.VarChar).Value = produto.Prod;
+                    cmd.Parameters.Add("@descr", MySqlDbType.VarChar).Value = produto.Descr;
+                    cmd.Parameters.Add("@qtd", MySqlDbType.Int64).Value = produto.Qtd;
+                    cmd.Parameters.Add("@preco", MySqlDbType.Double).Value = produto.Preco;
                     int linhasAfetadas = cmd.ExecuteNonQuery();
                     return linhasAfetadas > 0;
                 }
@@ -58,7 +54,7 @@ namespace ProjetoEcommerce.Repositorio
             using (var conexao = new MySqlConnection(_conexaoMySql))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("Select * from Produto", conexao);
+                MySqlCommand cmd = new MySqlCommand("Select * from produto", conexao);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -85,10 +81,10 @@ namespace ProjetoEcommerce.Repositorio
             using (var conexao = new MySqlConnection(_conexaoMySql)) 
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("Select * from Produto where Id = @id", conexao);
+                MySqlCommand cmd = new MySqlCommand("Select * from produto where Id = @id", conexao);
                 cmd.Parameters.AddWithValue("id", id);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                MySqlDataReader dr = cmd.ExecuteReader();
+                MySqlDataReader dr;
                 Produto produto = new Produto();
 
                 dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -108,7 +104,7 @@ namespace ProjetoEcommerce.Repositorio
             using (var conexao = new MySqlConnection(_conexaoMySql))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("delete from Produto where Id = @id", conexao);
+                MySqlCommand cmd = new MySqlCommand("delete from produto where Id = @id", conexao);
                 cmd.Parameters.AddWithValue("id", Id);
                 int i = cmd.ExecuteNonQuery();
                 conexao.Close();

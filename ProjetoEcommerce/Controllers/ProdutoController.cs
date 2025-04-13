@@ -30,7 +30,7 @@ namespace ProjetoEcommerce.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult editarProduto(int id) 
+        public IActionResult EditarProduto(int id) 
         {
             var produto = _produtoRepositorio.ObterProduto(id);
 
@@ -44,7 +44,7 @@ namespace ProjetoEcommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult editarProduto(int id, [Bind("Id, Prod, Descr, Qtd, Preco")] Produto produto)
+        public IActionResult EditarProduto(int id, [Bind("Id, Prod, Descr, Qtd, Preco")] Produto produto)
         {
             if (id != produto.Id) 
             { 

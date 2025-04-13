@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<ProjetoEcommerce.Models.Produto>
 
+<p style="justify-self:center;">
+    <a asp-controller="Cliente" asp-action="Index">Cliente</a> <span>-------</span> <a asp-controller="Produto" asp-action="Index">Produto</a>
+</p>
 <p>
-    <a asp-controller="Produto" asp-action="Cadastrar">Cadastra Produto</a>
+    <a asp-controller="Produto" asp-action="CadastrarProduto">Cadastrar Produto</a>
 </p>
 <table class="table">
     <thead>
@@ -44,8 +47,8 @@
                     @Html.DisplayFor(modelItem => item.Preco)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "EditarCliente", new { id = item.Id }) |
-                    @Html.ActionLink("Excluir", "ExcluirCliente", new { id = item.Id },
+                    @Html.ActionLink("Editar", "EditarProduto", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "ExcluirProduto", new { id = item.Id },
                              new { onclick = "return confirm('Deseja realmente Excluir este item?');" })
                 </td>
             </tr>
