@@ -31,10 +31,10 @@ namespace ProjetoEcommerce.Repositorio
                 {
                     conexao.Open();
                     MySqlCommand cmd = new MySqlCommand("Update produto set Prod=@prod, Descr=@descr, Qtd=@qtd, Preco=@preco " + " where Id = @id ", conexao);
-                    cmd.Parameters.Add("@id", MySqlDbType.Int64).Value = produto.Id;
+                    cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = produto.Id;
                     cmd.Parameters.Add("@prod", MySqlDbType.VarChar).Value = produto.Prod;
                     cmd.Parameters.Add("@descr", MySqlDbType.VarChar).Value = produto.Descr;
-                    cmd.Parameters.Add("@qtd", MySqlDbType.Int64).Value = produto.Qtd;
+                    cmd.Parameters.Add("@qtd", MySqlDbType.Int32).Value = produto.Qtd;
                     cmd.Parameters.Add("@preco", MySqlDbType.Double).Value = produto.Preco;
                     int linhasAfetadas = cmd.ExecuteNonQuery();
                     return linhasAfetadas > 0;
